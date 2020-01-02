@@ -16,10 +16,10 @@ console.log(jQuery) // 全局$定义在external里
 
 
 #### webpack打包图片
-1.在js中创建图片来引入
-2.在css中引入 background(url)
-3.img标签: html-withimg-loader (打包后会有空格错误)； html-loader（打包后错误）待解决
-【备注】file-loader 与 url-loader两个同时搭配时会生成两个图片文件，导致图片显示不出，目前处理方式是选择url-loader。 待解决
+1.在js中创建图片来引入  
+2.在css中引入 background(url)  
+3.img标签: html-withimg-loader (打包后会有空格错误)； html-loader（打包后错误）待解决  
+【备注】file-loader 与 url-loader两个同时搭配时会生成两个图片文件，导致图片显示不出，目前处理方式是选择url-loader。 待解决  
 
 #### 打包文件分类
 输出的路径可以自定义
