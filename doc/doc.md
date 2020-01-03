@@ -30,3 +30,35 @@ new MiniCssExtractPlugin({
 1. url-loader: outputPath: 'img/', // 图片自动归类到生成的img文件夹下
 2. url-loader: publicPath: 'test/' // 可以实现对图片单独加上路径前缀 实现外部加载
 【注】如果想对全局的cdn文件进行路径配置：output: publicPath: '/test/', // 用于按需加载或加载外部资源（cdn）时设置路径前缀，会自动加到图片或文件的前面 -> /test/img/9cb3a1b4ab2d541a71094a42542ebd04.jpg
+****
+#### 多页面应用打包
+如果配置创建了多个单独的 "chunk"（例如，使用多个入口起点或使用像 CommonsChunkPlugin 这样的插件），则应该使用占位符(substitutions)来确保每个文件具有唯一的名称。
+例如：
+```
+{
+  entry: {
+    app: './src/app.js',
+    search: './src/search.js'
+  },
+  output: {
+    filename: 'js/[name].[chunkhash:8].js', // 'js/'会自动打包生成js文件夹(打包文件分类)
+    path: __dirname + '/dist'
+  }
+}
+```
+1. 打包后的输出模版html也需要是多页面的（index.html, search.html）需要用到**HtmlWebpackPlugin**插件
+2. 配置N个html-webpack-plugin可以生成多个页面入口
+3. 添加chunks属性：当多个入口文件，需要编译后生成多个打包文件，那么chunks就能帮助选择要使用的js文件打包到对应的文件里
+[HtmlWebpackPlugin](https://github.com/jantimon/html-webpack-plugin#configuration) github上有更详细的介绍
+例如
+```
+plugins: [
+  new HtmlWebpackPlugin({
+    title: 'search',
+    template: './src/index.html',
+    filename: 'src/search.html',
+    chunks: ['search']
+  })
+]
+```
+打包后，serach.html文件里只引入search.js文件。

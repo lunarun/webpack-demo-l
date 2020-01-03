@@ -34,17 +34,19 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'index',
       template: './src/index.html',
-      filename: 'src/index.html',
+      filename: 'src/index.html', // 默认的是index.html
       minify: { // 模版压缩
         collapseWhitespace: true,
         removeComments: true,
       },
       hash: true,
+      chunks: ['index'],
     }),
     new HtmlWebpackPlugin({
       title: 'search',
       template: './src/index.html',
       filename: 'src/search.html',
+      chunks: ['search']
     }),
     new MiniCssExtractPlugin({
       filename: devMode ? 'style/[name].css' : 'style/[name].[hash].css', // ’css/‘可以自定义路径
