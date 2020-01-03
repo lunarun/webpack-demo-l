@@ -24,7 +24,7 @@ function log(target) {
 // import $ from 'jquery';
 // console.log($)
 
-import icon from './img1.jpg';
+import icon from './assets/img1.jpg';
 let myicon = new Image();
 myicon.src = icon;
 myicon.style.width = '100%';

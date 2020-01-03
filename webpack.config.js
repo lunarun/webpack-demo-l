@@ -11,18 +11,23 @@ const webpack = require('webpack');
 const devMode = process.env.NODE_ENV !== 'production'; // 此时process.env.NODE_ENV undefined
 
 module.exports = {
+  devServer: { // 开发服务器配置 - 不会build文件
+    contentBase: path.join(__dirname, "dist"),
+    port: 3001,
+    progress: true,
+  },
   entry: {
-    app: './src/index.js',
-    search: './src/search.js',
+    main: './src/index.js' // 单入口 默认main
+    // search: './src/search.js', // 多入口，自定义名称
   },
   output: {
     // filename: 'bundle.js',
-    filename: 'js/[name].[chunkhash:8].js', // 缓存 - 确保浏览器获取到修改后的文件；构建后的入口chunk; 可以自定义位数
+    filename: '[name].[chunkhash:8].js', // 缓存 - 确保浏览器获取到修改后的文件；构建后的入口chunk; 可以自定义位数
     path: path.resolve(__dirname, 'dist'),
     // libraryTarget: 'umd',
     // publicPath: '/',
   },
-  mode: 'development',
+  mode: 'development', // production
   optimization: { // 优化项 - 生产环境
     minimizer: [new UglifyJsPlugin({ // 压缩js - 生产环境
       sourceMap: true,
@@ -34,20 +39,20 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'index',
       template: './src/index.html',
-      filename: 'src/index.html', // 默认的是index.html
-      minify: { // 模版压缩
+      filename: 'index.html', // 默认的是index.html
+      minify: { // 模版压缩 - production
         collapseWhitespace: true,
         removeComments: true,
       },
       hash: true,
-      chunks: ['index'],
+      // chunks: ['index'],
     }),
-    new HtmlWebpackPlugin({
-      title: 'search',
-      template: './src/index.html',
-      filename: 'src/search.html',
-      chunks: ['search']
-    }),
+    // new HtmlWebpackPlugin({
+    //   title: 'search',
+    //   template: './src/index.html',
+    //   filename: 'src/search.html',
+    //   chunks: ['search']
+    // }),
     new MiniCssExtractPlugin({
       filename: devMode ? 'style/[name].css' : 'style/[name].[hash].css', // ’css/‘可以自定义路径
       chunkFilename: devMode ? 'style/[id].css' : 'style/[id].[hash].css',
@@ -134,8 +139,8 @@ module.exports = {
             loader: 'url-loader',
             options: {
               limit: 8192, // 如果图片小于8192字节 就转为base64
-              outputPath: '/', // 图片自动归类到生成的img文件夹下
-              // publicPath: 'test/'
+              outputPath: 'assets/', // 图片自动归类到生成的img文件夹下 自定义输出目录
+              publicPath: '../assets/' // 自定义发布目录，生成的页面中对图片路径的引用路径配置
             }
           }
         ]

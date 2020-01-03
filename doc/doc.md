@@ -27,8 +27,8 @@ new MiniCssExtractPlugin({
   filename: devMode ? 'css/[name].css' : 'css/[name].[hash].css', // ’css/‘可以自定义路径
   chunkFilename: devMode ? 'css/[id].css' : 'css/[id].[hash].css',
 }),
-1. url-loader: outputPath: 'img/', // 图片自动归类到生成的img文件夹下
-2. url-loader: publicPath: 'test/' // 可以实现对图片单独加上路径前缀 实现外部加载
+1. url-loader: outputPath: 'assets/', // 图片自动归类到生成的img文件夹下
+2. url-loader: publicPath: '../assets/' // 可以实现对图片单独加上路径前缀 实现外部加载
 【注】如果想对全局的cdn文件进行路径配置：output: publicPath: '/test/', // 用于按需加载或加载外部资源（cdn）时设置路径前缀，会自动加到图片或文件的前面 -> /test/img/9cb3a1b4ab2d541a71094a42542ebd04.jpg
 ****
 #### 多页面应用打包
@@ -62,3 +62,5 @@ plugins: [
 ]
 ```
 打包后，serach.html文件里只引入search.js文件。
+****
+#### source-map
