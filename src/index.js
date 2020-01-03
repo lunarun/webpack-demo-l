@@ -16,7 +16,9 @@ console.log(b.a);
 a();
 
 function log(target) {
-  console.log(target)
+  setTimeout(() => {
+    console.log('target')
+  }, 0)
 }
 
 // require('@babel/polyfill');

@@ -1,4 +1,3 @@
 module.exports = function () {
-  console.log('luna')
-  console.lo('test');
+  console.log('test JS transfer')
 }

@@ -16,6 +16,7 @@ module.exports = {
     port: 3001,
     progress: true,
   },
+  devtool: 'eval-source-map',
   entry: {
     main: './src/index.js' // 单入口 默认main
     // search: './src/search.js', // 多入口，自定义名称
@@ -27,6 +28,12 @@ module.exports = {
     // libraryTarget: 'umd',
     // publicPath: '/',
   },
+  watch: true, // 执行webpack后可实时打包文件
+  watchOptions: {
+    aggregateTimeout: 300, // 防抖时间
+    poll: 1000, // 每秒问我1000次
+    ignored: /node_modules/
+  },  
   mode: 'development', // production
   optimization: { // 优化项 - 生产环境
     minimizer: [new UglifyJsPlugin({ // 压缩js - 生产环境
@@ -140,7 +147,7 @@ module.exports = {
             options: {
               limit: 8192, // 如果图片小于8192字节 就转为base64
               outputPath: 'assets/', // 图片自动归类到生成的img文件夹下 自定义输出目录
-              publicPath: '../assets/' // 自定义发布目录，生成的页面中对图片路径的引用路径配置
+              publicPath: '/dist/assets/' // 自定义发布目录，生成的页面中对图片路径的引用路径配置
             }
           }
         ]
