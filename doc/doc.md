@@ -48,7 +48,7 @@ new MiniCssExtractPlugin({
 ```
 1. 打包后的输出模版html也需要是多页面的（index.html, search.html）需要用到**HtmlWebpackPlugin**插件
 2. 配置N个html-webpack-plugin可以生成多个页面入口
-3. 添加chunks属性：当多个入口文件，需要编译后生成多个打包文件，那么chunks就能帮助选择要使用的js文件打包到对应的文件里
+3. 添加chunks属性：当多个入口文件，需要编译后生成多个打包文件，那么chunks就能帮助选择要使用的js文件打包到对应的文件里   
 [HtmlWebpackPlugin](https://github.com/jantimon/html-webpack-plugin#configuration) github上有更详细的介绍
 例如
 ```
